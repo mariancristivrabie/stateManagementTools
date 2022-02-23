@@ -1,6 +1,6 @@
 import React from "react";
 import { RootStore, StoreProvider } from "../../mobxStore";
-import Auctions from "./Auctions/Auctions";
+import {Auctions} from 'components/Mobx'
 const store = new RootStore();
 const MobXExample = () => {
     return(
