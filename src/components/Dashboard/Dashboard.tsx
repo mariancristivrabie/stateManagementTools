@@ -17,7 +17,7 @@ export const Dashboard = () => {
           </li>
           <li
             className="dashboard__route"
-            onClick={() => history.push("/context")}
+            onClick={() => history.push("/mobx")}
           >
             Mobx
           </li>

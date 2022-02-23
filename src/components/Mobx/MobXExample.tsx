@@ -1,5 +1,13 @@
 import React from "react";
-
-const MobXExample = () => <div>Try me</div>;
+import { RootStore, StoreProvider } from "../../mobxStore";
+import Auctions from "./Auctions/Auctions";
+const store = new RootStore();
+const MobXExample = () => {
+    return(
+    <StoreProvider store={store}>
+        <Auctions />
+    </StoreProvider>
+    )
+};
 
 export default MobXExample;
