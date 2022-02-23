@@ -1,7 +1,7 @@
-import { useStore } from 'mobxStore'
 import React from 'react'
+import { useStore } from 'mobxStore'
 
-const Auctions = () => {
+export const Auctions = () => {
     const {auctionStore} = useStore();
     const {auctions} = auctionStore
 
@@ -17,5 +17,3 @@ const Auctions = () => {
         </div>
     )
 }
-
-export default Auctions
