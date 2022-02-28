@@ -1,17 +1,30 @@
 import React, { useContext } from "react";
 import { Counter, CounterContext } from "../ContextAPI/ContextAPI";
 import CounterArea from "../CounterArea/CounterArea";
+import getNewCounterValue from "../Helpers/counterUpdater";
 
 const FirstComponent = () => {
-  const counter = useContext(CounterContext) as Counter;
+  const { counterValues, setCounterValues } = useContext(CounterContext) as {
+    counterValues: Counter;
+    setCounterValues: Function;
+  };
+  console.log("RENDERED FIRST");
 
   return (
     <CounterArea
-      counterValue={counter.firstCounter}
-      onIncrease={() => {}}
-      onDecrease={() => {}}
+      counterValue={counterValues.firstCounter}
+      onIncrease={() =>
+        setCounterValues(
+          getNewCounterValue(counterValues, "firstCounter", "INCREASE")
+        )
+      }
+      onDecrease={() =>
+        setCounterValues(
+          getNewCounterValue(counterValues, "firstCounter", "DECREASE")
+        )
+      }
     />
   );
 };
 
-export default FirstComponent;
+export default React.memo(FirstComponent);
