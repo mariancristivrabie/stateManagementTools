@@ -1,13 +1,13 @@
 import React from "react";
 import { RootStore, StoreProvider } from "../../mobxStore";
-import {Auctions} from 'components/Mobx'
+import { Auctions } from "components/Mobx";
 const store = new RootStore();
 const MobXExample = () => {
-    return(
+  return (
     <StoreProvider store={store}>
-        <Auctions />
+      <Auctions />
     </StoreProvider>
-    )
+  );
 };
 
 export default MobXExample;
