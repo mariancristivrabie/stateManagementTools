@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react-lite';
 import React, { useEffect, useRef } from 'react'
 
 export const EndDateWrong = ({endDate}:{endDate:string}) => {

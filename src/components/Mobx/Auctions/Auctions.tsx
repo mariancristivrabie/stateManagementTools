@@ -13,6 +13,7 @@ import { MaxPrice } from '../MaxPrice/MaxPrice';
 import { NameComponentWrong } from '../NameComponentWrong';
 import { OwnerWrong } from '../OwnerWrong';
 import { EndDateWrong } from '../EndDateWrong';
+import { MaxPigeonPrice } from '../MaxPigeonPrice/MaxPigeonPrice';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -24,8 +25,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const Auctions = observer(() => {
     const {auctionStore} = useStore();
-    const {auctions} = auctionStore
+    const {auctions, maxPigeonPrice} = auctionStore
     const [car, pigeon] = auctions;
+
 
     //car state constants
     const [carOwner, setCarOwner] = useState(car.owner);
@@ -78,18 +80,18 @@ export const Auctions = observer(() => {
 
     const handleSavePigeonBid = () => {
         auctionStore.setPigeonNewBid({
-            name: carNewAuctionName,
-            price: carNewAuctionPrice,
+            name: pigeonNewAuctionName,
+            price: pigeonNewAuctionPrice,
             date: '09.03.2022'
         })
     }
 
     const handleSaveAllPigeon = () => {
         auctionStore.setPigeonMultipleChanges({
-            owner: carOwner,
-            endDate:carEndDate,
-            name: carNewAuctionName,
-            price: carNewAuctionPrice,
+            owner: pigeonOwner,
+            endDate:pigeonEndDate,
+            name: pigeonNewAuctionName,
+            price: pigeonNewAuctionPrice,
             date: '09.03.2022'
         })
     }
@@ -102,7 +104,7 @@ export const Auctions = observer(() => {
                 </h1>
             </Stack>
             <Divider />
-            <Grid container spacing={2} sx={{marginBottom:2, marginTop:2}}>
+            <Grid container spacing={4} sx={{marginBottom:2, marginTop:2}}>
                 <Grid item xs={6} spacing={8}>
                     <Stack>
                         <h3>Correct:</h3>
@@ -227,7 +229,7 @@ export const Auctions = observer(() => {
                 </Grid>
             </Grid>
             <Divider />
-            <Grid container spacing={2} sx={{marginTop:2}}>
+            <Grid container spacing={4} sx={{marginTop:2}}>
                 <Grid item xs={6} spacing={8}>
                     
                     <Grid container spacing={2}>
@@ -258,7 +260,7 @@ export const Auctions = observer(() => {
                         </Grid>
                         <Grid item xs={4}>
                             <Item>
-                                <MaxPrice isCar />
+                                <MaxPrice />
                             </Item>
                         </Grid>
                     </Grid>
@@ -292,7 +294,7 @@ export const Auctions = observer(() => {
                         </Grid>
                         <Grid item xs={4}>
                             <Item>
-                                <MaxPrice isCar={false} />
+                                <MaxPigeonPrice maxPrice={maxPigeonPrice}/>
                             </Item>
                         </Grid>
                     </Grid>

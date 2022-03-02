@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-export const OwnerWrong = ({owner}:{owner:any}) => {
+export const MaxPigeonPrice = ({maxPrice}:{maxPrice:number}) => {
     const count = useRef(0);
     let currentCount = count.current;
 
@@ -9,10 +9,11 @@ export const OwnerWrong = ({owner}:{owner:any}) => {
     });
     
     currentCount += 1;
+
     return(
         <>
-            <h2>Renders:{currentCount}</h2>
-            <h2>Owner: {owner}</h2>
+            <h2>Renders{currentCount}</h2>
+            <h2>Max Price:{maxPrice}</h2>
         </>
     )
 }

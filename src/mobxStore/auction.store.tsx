@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from "mobx";
+import { action, makeAutoObservable, toJS } from "mobx";
 import car from 'assets/auto.jpg'
 import pigeon from 'assets/pigeon.jpg'
 
@@ -73,6 +73,7 @@ class AuctionStore{
 
     setPigeonNewBid({name, price, date}:{name:string,price:number, date:string}){
         this.auctions[1].bids.push({name,price,timeStamp:date})
+        console.log('test', toJS(this.auctions[1].bids));
     }
 
     setPigeonMultipleChanges({name, price, date, owner, endDate}:{name:string,price:number, date:string, owner:string, endDate:string}){

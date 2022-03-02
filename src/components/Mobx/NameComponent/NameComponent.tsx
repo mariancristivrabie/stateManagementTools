@@ -17,7 +17,7 @@ export const NameComponent = observer(({auction}:{auction:any}) => {
             <h2>Renders: {currentCount}</h2>
             <h2>Name:{auction.name}</h2>
         </div>
-        <img height={120} src={auction.imgSrc} />
+        <img height={120} src={auction.imgSrc} alt='auction img' />
     </div>
     )
 })
