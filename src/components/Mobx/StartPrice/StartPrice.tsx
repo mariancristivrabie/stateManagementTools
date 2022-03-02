@@ -13,7 +13,7 @@ export const StartPrice = observer(({auction}:{auction:any}) => {
     currentCount += 1;
     return (
         <>
-            <h4>Renders:{currentCount}</h4>
+            <h2>Renders:{currentCount}</h2>
             <h2>Start Price:{startPrice}</h2>
         </>
     )

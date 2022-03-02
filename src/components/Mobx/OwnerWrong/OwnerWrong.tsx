@@ -1,8 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useRef } from 'react'
 
-export const Owner = observer(({auction}:{auction:any}) => {
-    const {owner} = auction;
+export const OwnerWrong = ({owner}:{owner:any}) => {
     const count = useRef(0);
     let currentCount = count.current;
 
@@ -17,4 +16,4 @@ export const Owner = observer(({auction}:{auction:any}) => {
             <h2>Owner: {owner}</h2>
         </>
     )
-})
+}

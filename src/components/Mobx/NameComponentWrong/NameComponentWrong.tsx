@@ -1,8 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useRef } from 'react'
 
-export const StartDate = observer(({auction}:{auction:any}) => {
-    const {startDate} = auction
+export const NameComponentWrong = ({name, imgSrc}:{name:string, imgSrc:string}) => {
     const count = useRef(0);
     let currentCount = count.current;
 
@@ -11,10 +10,14 @@ export const StartDate = observer(({auction}:{auction:any}) => {
     });
     
     currentCount += 1;
+
     return (
-        <>
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+        <div>
             <h2>Renders: {currentCount}</h2>
-            <h2>Start: {startDate}</h2>
-        </>
+            <h2>Name:{name}</h2>
+        </div>
+        <img height={120} src={imgSrc} />
+    </div>
     )
-})
+}

@@ -12,9 +12,12 @@ export const NameComponent = observer(({auction}:{auction:any}) => {
     currentCount += 1;
 
     return (
-    <>
-        <h5>Renders: {currentCount}</h5>
-        <h2>Name:{auction.name}</h2>
-    </>
+    <div style={{display:'flex',justifyContent:'space-between'}}>
+        <div>
+            <h2>Renders: {currentCount}</h2>
+            <h2>Name:{auction.name}</h2>
+        </div>
+        <img height={120} src={auction.imgSrc} />
+    </div>
     )
 })

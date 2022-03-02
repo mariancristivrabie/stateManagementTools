@@ -62,6 +62,24 @@ class AuctionStore{
         this.setCarOwner(owner);
         this.setCarNewBid({name, price, date})
     }
+
+    setPigeonOwner(owner:string){
+        this.auctions[1].owner = owner;
+    }
+
+    setPigeonEndDate(endDate:string){
+        this.auctions[1].endDate=endDate;
+    }
+
+    setPigeonNewBid({name, price, date}:{name:string,price:number, date:string}){
+        this.auctions[1].bids.push({name,price,timeStamp:date})
+    }
+
+    setPigeonMultipleChanges({name, price, date, owner, endDate}:{name:string,price:number, date:string, owner:string, endDate:string}){
+        this.setPigeonEndDate(endDate);
+        this.setPigeonOwner(owner);
+        this.setPigeonNewBid({name, price, date})
+    }
     
 }
 

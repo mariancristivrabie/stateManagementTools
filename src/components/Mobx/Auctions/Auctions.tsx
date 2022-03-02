@@ -10,6 +10,9 @@ import { Owner } from '..';
 import { StartDate } from '../StartDate';
 import { EndDate } from '../EndDate';
 import { MaxPrice } from '../MaxPrice/MaxPrice';
+import { NameComponentWrong } from '../NameComponentWrong';
+import { OwnerWrong } from '../OwnerWrong';
+import { EndDateWrong } from '../EndDateWrong';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -24,14 +27,20 @@ export const Auctions = observer(() => {
     const {auctions} = auctionStore
     const [car, pigeon] = auctions;
 
+    //car state constants
     const [carOwner, setCarOwner] = useState(car.owner);
     const [carEndDate, setCarEndDate] = useState(car.endDate);
     const [carNewAuctionPrice, setCarNewAuctionPrice] = useState(0);
     const [carNewAuctionName, setCarNewAuctionName] = useState('');
 
-    console.log(car)
-    console.log(pigeon)
+    //pigeon state constants
+    const [pigeonOwner, setPigeonOwner] = useState(pigeon.owner);
+    const [pigeonEndDate, setPigeonEndDate] = useState(pigeon.endDate);
+    const [pigeonNewAuctionPrice, setPigeonNewAuctionPrice] = useState(0);
+    const [pigeonNewAuctionName, setPigeonNewAuctionName] = useState('');
 
+  
+    // car auciton changes
     const handleSaveOwner = () => {
         auctionStore.setCarOwner(carOwner);
     }
@@ -58,8 +67,35 @@ export const Auctions = observer(() => {
         })
     }
 
+    // pigeon auction changes
+    const handleSavePigeonOwner = () => {
+        auctionStore.setPigeonOwner(pigeonOwner);
+    }
+
+    const handleSavePigeonEndDate = () => {
+        auctionStore.setPigeonEndDate(pigeonEndDate)
+    }
+
+    const handleSavePigeonBid = () => {
+        auctionStore.setPigeonNewBid({
+            name: carNewAuctionName,
+            price: carNewAuctionPrice,
+            date: '09.03.2022'
+        })
+    }
+
+    const handleSaveAllPigeon = () => {
+        auctionStore.setPigeonMultipleChanges({
+            owner: carOwner,
+            endDate:carEndDate,
+            name: carNewAuctionName,
+            price: carNewAuctionPrice,
+            date: '09.03.2022'
+        })
+    }
+
     return (
-        <Box sx={{width:'90%', height:'100%', backgroundColor:'#ffffff', margin:'auto'}}>
+        <Box sx={{width:'70%', height:'100%', backgroundColor:'#ffffff', margin:'auto'}}>
             <Stack spacing={8}>
                 <h1>
                     Auctions:
@@ -68,6 +104,9 @@ export const Auctions = observer(() => {
             <Divider />
             <Grid container spacing={2} sx={{marginBottom:2, marginTop:2}}>
                 <Grid item xs={6} spacing={8}>
+                    <Stack>
+                        <h3>Correct:</h3>
+                    </Stack>
                     <Item>
                         <Stack direction='column' spacing={4}>
                             <Stack direction='row' spacing={4}>
@@ -119,21 +158,78 @@ export const Auctions = observer(() => {
                                     Save
                                 </Button>
                             </Stack>
-                            <Button variant='contained' onClick={handleSaveAll} color='secondary'>
+                            <Button variant='outlined' onClick={handleSaveAll} color='primary'>
                                 Save all changes
                             </Button>
                         </Stack>
                     </Item>
                 </Grid>
                 <Grid item xs={6}>
+                    <Stack>
+                        <h3>Wrong:</h3>
+                    </Stack>
                     <Item>
-
+                        <Stack direction='column' spacing={4}>
+                            <Stack direction='row' spacing={4}>
+                                <TextField
+                                    label="Owner"
+                                    id="outlined-size-small"
+                                    defaultValue="Small"
+                                    size="small"
+                                    value={pigeonOwner}
+                                    onChange={(e:any) => setPigeonOwner(e.target.value)}
+                                />
+                                <Button variant='contained' onClick={handleSavePigeonOwner} color='primary'>
+                                    Save
+                                </Button>
+                            </Stack>
+                        
+                            <Stack direction='row' spacing={4}>
+                                <TextField
+                                    label="End date"
+                                    id="outlined-size-small"
+                                    defaultValue="Small"
+                                    size="small"
+                                    value={pigeonEndDate}
+                                    onChange={(e:any) => setPigeonEndDate(e.target.value)}
+                                />
+                                <Button variant='contained' onClick={handleSavePigeonEndDate} color='primary'>
+                                    Save
+                                </Button>
+                            </Stack>
+                            <Stack direction='row' spacing={4}>
+                                <TextField
+                                    label="Name"
+                                    id="outlined-size-small"
+                                    defaultValue="Small"
+                                    size="small"
+                                    value={pigeonNewAuctionName}
+                                    onChange={(e:any) => setPigeonNewAuctionName(e.target.value)}
+                                />
+                                <TextField
+                                    label="Price"
+                                    id="outlined-size-small"
+                                    defaultValue="Small"
+                                    size="small"
+                                    type='number'
+                                    value={pigeonNewAuctionPrice}
+                                    onChange={(e:any) => setPigeonNewAuctionPrice(e.target.value)}
+                                />
+                                <Button variant='contained' onClick={handleSavePigeonBid} color='primary'>
+                                    Save
+                                </Button>
+                            </Stack>
+                            <Button variant='outlined' onClick={handleSaveAllPigeon} color='primary'>
+                                Save all changes
+                            </Button>
+                        </Stack>
                     </Item>
                 </Grid>
             </Grid>
             <Divider />
             <Grid container spacing={2} sx={{marginTop:2}}>
                 <Grid item xs={6} spacing={8}>
+                    
                     <Grid container spacing={2}>
                         <Grid item spacing={4} xs={12}>
                             <Item>
@@ -150,27 +246,56 @@ export const Auctions = observer(() => {
                                 <Owner auction={car} />
                             </Item>
                         </Grid> 
-                        <Grid item xs={3}>
+                        <Grid item xs={4}>
                             <Item>
                                 <StartDate auction={car} />
                             </Item>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={4}>
                             <Item>
                                 <EndDate auction={car} />
                             </Item>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={4}>
                             <Item>
-                                <MaxPrice />
+                                <MaxPrice isCar />
                             </Item>
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={6} spacing={8}>
-                    <Item>
-                        test 2
-                    </Item>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} spacing={4}>
+                            <Item>
+                                <NameComponentWrong name={pigeon.name} imgSrc={pigeon.imgSrc} />
+                            </Item>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Item>
+                                <StartPrice auction={pigeon} />
+                            </Item>
+                        </Grid> 
+                        <Grid item xs={6}>
+                            <Item>
+                                <OwnerWrong owner={pigeon.owner} />
+                            </Item>
+                        </Grid> 
+                        <Grid item xs={4}>
+                            <Item>
+                                <StartDate auction={pigeon} />
+                            </Item>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Item>
+                                <EndDateWrong endDate={pigeon.endDate} />
+                            </Item>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Item>
+                                <MaxPrice isCar={false} />
+                            </Item>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Box>

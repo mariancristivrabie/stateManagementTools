@@ -13,8 +13,8 @@ export const EndDate = observer(({auction}:{auction:any}) => {
     currentCount += 1;
     return (
         <>
-            <h5>Renders: {currentCount}</h5>
-            <h2>End Date:{endDate}</h2>
+            <h2>Renders: {currentCount}</h2>
+            <h2>End: {endDate}</h2>
         </>
     )
 })
