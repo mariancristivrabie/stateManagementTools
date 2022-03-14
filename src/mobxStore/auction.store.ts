@@ -4,6 +4,7 @@ import pigeon from 'assets/pigeon.jpg'
 
 
 class AuctionStore{
+    val = 10;
     auctions = [
         {
             name:'Masina',
@@ -43,6 +44,10 @@ class AuctionStore{
 
     get maxPigeonPrice(){
        return Math.max(...this.auctions[1].bids.map(bid=>bid.price))
+    }
+
+    get computed(){
+        return this.val*10;
     }
 
     @action setCarOwner(owner:string){
