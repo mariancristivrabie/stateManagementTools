@@ -1,9 +1,5 @@
 import { EndDate } from 'components/Mobx/EndDate';
 import { MaxPrice } from 'components/Mobx/MaxPrice/MaxPrice';
-import { NameComponent } from 'components/Mobx/NameComponent';
-import { Owner } from 'components/Mobx/Owner';
-import { StartDate } from 'components/Mobx/StartDate';
-import { StartPrice } from 'components/Mobx/StartPrice';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'mobxStore';
 import React, { useState } from 'react'
@@ -14,14 +10,10 @@ export const GoodAuction = observer(() => {
     const {auctions} = auctionStore
     const [car] = auctions;
 
-    const [carOwner, setCarOwner] = useState(car.owner);
     const [carEndDate, setCarEndDate] = useState(car.endDate);
     const [carNewAuctionPrice, setCarNewAuctionPrice] = useState(0);
     const [carNewAuctionName, setCarNewAuctionName] = useState('');
 
-    const handleSaveOwner = () => {
-        auctionStore.setCarOwner(carOwner);
-    }
 
     const handleSaveEndDate = () => {
         auctionStore.setCarEndDate(carEndDate)
@@ -37,7 +29,6 @@ export const GoodAuction = observer(() => {
 
     const handleSaveAll = () => {
         auctionStore.setCarMultipleChanges({
-            owner: carOwner,
             endDate:carEndDate,
             name: carNewAuctionName,
             price: carNewAuctionPrice,
@@ -48,13 +39,9 @@ export const GoodAuction = observer(() => {
     return(
         <div className='auction-container'>
             <div>
-                <h3>Correct:</h3>
+                <h2>Correct:</h2>
             </div>
             <div className='auction-actions'>
-                <div className='action'>
-                    <input type='text' value={carOwner} className='auction-input' onChange={(e) => setCarOwner(e.target.value)} />
-                    <button className='auction-button' onClick={handleSaveOwner}> Save </button>
-                </div>
                 <div className='action'>
                     <input type='text' value={carEndDate} className='auction-input' onChange={(e) => setCarEndDate(e.target.value)} />
                     <button className='auction-button' onClick={handleSaveEndDate}> Save </button>
@@ -68,21 +55,6 @@ export const GoodAuction = observer(() => {
             </div>
             <div className='auction-details'>
                 <div className='auction-row'>
-                    <NameComponent auction={car} />
-                </div>
-
-                <div className='auction-row'>
-                    <div className='auction-cell'>
-                        <StartPrice auction={car} />
-                    </div>
-                    <div className='auction-cell'>
-                        <Owner auction={car} />
-                    </div>
-                </div>
-                <div className='auction-row'>
-                    <div className='auction-cell'>
-                        <StartDate auction={car} />
-                    </div>
                     <div className='auction-cell'>
                         <EndDate auction={car} />
                     </div>

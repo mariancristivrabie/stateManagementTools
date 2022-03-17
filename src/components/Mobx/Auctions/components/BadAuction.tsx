@@ -1,9 +1,5 @@
 import { EndDateWrong } from 'components/Mobx/EndDateWrong';
 import { MaxPigeonPrice } from 'components/Mobx/MaxPigeonPrice/MaxPigeonPrice';
-import { NameComponentWrong } from 'components/Mobx/NameComponentWrong';
-import { OwnerWrong } from 'components/Mobx/OwnerWrong';
-import { StartDate } from 'components/Mobx/StartDate';
-import { StartPrice } from 'components/Mobx/StartPrice';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'mobxStore';
 import React, { useState } from 'react'
@@ -14,14 +10,10 @@ export const BadAuction = observer(() => {
     const {auctions, maxPigeonPrice} = auctionStore
     const [_, pigeon] = auctions;
 
-    const [pigeonOwner, setPigeonOwner] = useState(pigeon.owner);
     const [pigeonEndDate, setPigeonEndDate] = useState(pigeon.endDate);
     const [pigeonNewAuctionPrice, setPigeonNewAuctionPrice] = useState(0);
     const [pigeonNewAuctionName, setPigeonNewAuctionName] = useState('');
 
-    const handleSavePigeonOwner = () => {
-        auctionStore.setPigeonOwner(pigeonOwner);
-    }
 
     const handleSavePigeonEndDate = () => {
         auctionStore.setPigeonEndDate(pigeonEndDate)
@@ -37,7 +29,6 @@ export const BadAuction = observer(() => {
 
     const handleSaveAllPigeon = () => {
         auctionStore.setPigeonMultipleChanges({
-            owner: pigeonOwner,
             endDate:pigeonEndDate,
             name: pigeonNewAuctionName,
             price: pigeonNewAuctionPrice,
@@ -47,13 +38,9 @@ export const BadAuction = observer(() => {
     return(
         <div className='auction-container'>
             <div>
-                <h3>Wrong:</h3>
+                <h2>Wrong:</h2>
             </div>
             <div className='auction-actions'>
-                <div className='action'>
-                    <input type='text' value={pigeonOwner} className='auction-input' onChange={(e) => setPigeonOwner(e.target.value)} />
-                    <button className='auction-button' onClick={handleSavePigeonOwner}> Save </button>
-                </div>
                 <div className='action'>
                     <input type='text' value={pigeonEndDate} className='auction-input' onChange={(e) => setPigeonEndDate(e.target.value)} />
                     <button className='auction-button' onClick={handleSavePigeonEndDate}> Save </button>
@@ -67,20 +54,6 @@ export const BadAuction = observer(() => {
             </div>
             <div className='auction-details'>
                 <div className='auction-row'>
-                    <NameComponentWrong name={pigeon.name} imgSrc={pigeon.imgSrc} />
-                </div>
-                <div className='auction-row'>
-                    <div className='auction-cell'>
-                        <StartPrice auction={pigeon} />
-                    </div>
-                    <div className='auction-cell'>
-                        <OwnerWrong owner={pigeon.owner} />
-                    </div>
-                </div>
-                <div className='auction-row'>
-                    <div className='auction-cell'>
-                        <StartDate auction={pigeon} />
-                    </div>
                     <div className='auction-cell'>
                         <EndDateWrong endDate={pigeon.endDate} />
                     </div>
