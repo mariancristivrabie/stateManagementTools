@@ -4,6 +4,7 @@ import pigeon from 'assets/pigeon.jpg'
 
 
 class AuctionStore{
+    val = 10;
     auctions = [
         {
             name:'Masina',
@@ -45,6 +46,10 @@ class AuctionStore{
        return Math.max(...this.auctions[1].bids.map(bid=>bid.price))
     }
 
+    get computed(){
+        return Math.pow(this.val,2)
+    }
+
     @action setCarOwner(owner:string){
         this.auctions[0].owner = owner;
     }
@@ -57,9 +62,8 @@ class AuctionStore{
         this.auctions[0].bids.push({name,price,timeStamp:date})
     }
 
-    @action setCarMultipleChanges({name, price, date, owner, endDate}:{name:string,price:number, date:string, owner:string, endDate:string}){
+    @action setCarMultipleChanges({name, price, date,  endDate}:{name:string,price:number, date:string, endDate:string}){
         this.setCarEndDate(endDate);
-        this.setCarOwner(owner);
         this.setCarNewBid({name, price, date})
     }
 
@@ -76,9 +80,8 @@ class AuctionStore{
         console.log('test', toJS(this.auctions[1].bids));
     }
 
-    setPigeonMultipleChanges({name, price, date, owner, endDate}:{name:string,price:number, date:string, owner:string, endDate:string}){
+    setPigeonMultipleChanges({name, price, date, endDate}:{name:string,price:number, date:string, endDate:string}){
         this.setPigeonEndDate(endDate);
-        this.setPigeonOwner(owner);
         this.setPigeonNewBid({name, price, date})
     }
     

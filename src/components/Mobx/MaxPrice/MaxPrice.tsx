@@ -7,17 +7,12 @@ export const MaxPrice = observer(() => {
     const {maxCarPrice} = auctionStore
 
     const count = useRef(0);
-    let currentCount = count.current;
 
-    useEffect(() => {
-        count.current = currentCount;
-    });
-    
-    currentCount += 1;
+    count.current += 1;
 
     return(
         <>
-            <h2>Renders{currentCount}</h2>
+            <h2>Renders{count.current}</h2>
             <h2>Max Price:{maxCarPrice}</h2>
         </>
     )
